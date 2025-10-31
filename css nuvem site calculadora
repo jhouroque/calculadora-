@@ -1,0 +1,23 @@
+/* Botão WhatsApp Verde - Forçado */
+#btnWhatsInline {
+  background: #25D366 !important;
+  color: white !important;
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+  width: 100% !important;
+  max-width: 500px !important;
+}
+
+#btnWhatsInline:hover {
+  background: #128C7E !important;
+  transform: scale(1.02) !important;
+}
