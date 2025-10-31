@@ -1,0 +1,424 @@
+<!-- ====== CALCULADORA DE ESPUMAS CASAROQUE - VERSÃO FINAL ====== -->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'rosa-pastel': '#F7E8EB',
+          'marrom-escuro': '#4B3A2C',
+          'bege-suave': '#FFF4D6',
+          'whats': '#25D366',
+          'whats-dark': '#128C7E'
+        },
+        fontFamily: {
+          montserrat: ['Montserrat', 'ui-sans-serif', 'system-ui']
+        }
+      }
+    }
+  }
+</script>
+</p>
+<div id="csroque-wrapper" class="font-montserrat px-4 py-10"><!-- TÍTULO E INTRO -->
+<section class="text-center mb-12">
+<h1 class="text-3xl md:text-4xl font-bold text-marrom-escuro mb-3">Sua Espuma Perfeita para o Cantinho do Beb&ecirc;</h1>
+<p class="text-gray-700 max-w-2xl mx-auto">Criamos esta guia para ajudar voc&ecirc; a escolher e or&ccedil;ar a espuma ideal para ber&ccedil;o, trocador, almofadas e muito mais. Simples e direto.</p>
+</section>
+<!-- COMO MEDIR -->
+<section class="mb-10">
+<h2 class="text-xl md:text-2xl font-bold text-center text-marrom-escuro mb-6">Como medir suas espumas</h2>
+<div class="grid md:grid-cols-2 gap-6"><!-- Cilíndricas -->
+<div class="bg-white border border-gray-100 shadow-sm rounded-lg p-5">
+<h3 class="font-bold text-marrom-escuro mb-2">Espumas cil&iacute;ndricas (rolinhos)</h3>
+<p class="text-sm text-gray-600 mb-3">Me&ccedil;a o di&acirc;metro e o comprimento.</p>
+<ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+<li><strong>Di&acirc;metro:</strong> ex.: 13 cm &mdash; me&ccedil;a atravessando o centro do rolinho.</li>
+<li><strong>Comprimento:</strong> ex.: 130 cm &mdash; de uma ponta at&eacute; a outra.</li>
+</ul>
+</div>
+<!-- Retangulares -->
+<div class="bg-white border border-gray-100 shadow-sm rounded-lg p-5">
+<h3 class="font-bold text-marrom-escuro mb-2">Espumas retangulares</h3>
+<p class="text-sm text-gray-600 mb-3">Use para colch&otilde;es, trocadores e encostos.</p>
+<ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+<li><strong>Comprimento:</strong> ex.: 130 cm &mdash; lado maior.</li>
+<li><strong>Largura:</strong> ex.: 30 cm &mdash; lado menor.</li>
+<li><strong>Altura/Espessura:</strong> ex.: 5 cm &mdash; grossura da espuma.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- DENSIDADES -->
+<section class="mb-10">
+<h2 class="text-xl md:text-2xl font-bold text-center text-marrom-escuro mb-6">Qual Densidade Escolher? O Conforto do seu Beb&ecirc;!</h2>
+<p class="text-center text-sm text-gray-600 mb-4">Em d&uacute;vida? Comece pela <strong>D23</strong>, muito usada no enxoval do beb&ecirc;.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-bege-suave rounded-lg p-4 text-center text-sm"><strong class="block text-marrom-escuro mb-1">D23</strong> <span class="text-gray-700">Perfeita para kits ber&ccedil;o e almofadas.</span></div>
+<div class="bg-bege-suave rounded-lg p-4 text-center text-sm"><strong class="block text-marrom-escuro mb-1">D28</strong> <span class="text-gray-700">&Oacute;tima para ber&ccedil;o/trocador.</span></div>
+<div class="bg-bege-suave rounded-lg p-4 text-center text-sm"><strong class="block text-marrom-escuro mb-1">D33</strong> <span class="text-gray-700">Para assentos de uso frequente.</span></div>
+<div class="bg-bege-suave rounded-lg p-4 text-center text-sm"><strong class="block text-marrom-escuro mb-1">D44</strong> <span class="text-gray-700">Para m&aacute;xima durabilidade.</span></div>
+</div>
+</section>
+<!-- CALCULADORA -->
+<section id="calc" class="bg-rosa-pastel rounded-2xl shadow-md p-5 md:p-7 mb-10">
+<h2 class="text-2xl font-bold text-center text-marrom-escuro mb-1">Orce suas espumas</h2>
+<p class="text-center text-sm text-gray-700 mb-6">Use os campos abaixo. Voc&ecirc; pode adicionar at&eacute; 10 medidas diferentes.</p>
+<div id="measurementsContainer" class="space-y-6"></div>
+<div class="text-center mt-4"><button id="btnAddMeasurement" class="bg-marrom-escuro text-white font-semibold rounded-md px-6 py-2 mr-2 hover:opacity-90 transition-opacity"> + Adicionar nova medida </button> <button id="btnClearBudget" class="bg-gray-300 text-marrom-escuro font-semibold rounded-md px-6 py-2 hover:bg-gray-400 transition-opacity"> Limpar or&ccedil;amento salvo </button>
+<p id="measurementLimitMessage" class="text-xs text-gray-600 mt-2">Voc&ecirc; pode adicionar at&eacute; 10 medidas diferentes.</p>
+</div>
+<!-- Perfil do cliente (opcional) -->
+<div class="max-w-xl mx-auto mt-8"><label class="block text-sm font-semibold text-gray-700 mb-2">Como voc&ecirc; se identifica? (opcional)</label>
+<div id="audienceGroup" class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm"><label class="inline-flex items-center gap-2"> <input class="accent-marrom-escuro" type="checkbox" value="Artes&atilde;" /> Artes&atilde; </label> <label class="inline-flex items-center gap-2"> <input class="accent-marrom-escuro" type="checkbox" value="Ateli&ecirc;" /> Ateli&ecirc; </label> <label class="inline-flex items-center gap-2"> <input class="accent-marrom-escuro" type="checkbox" value="Loja" /> Loja </label> <label class="inline-flex items-center gap-2"> <input class="accent-marrom-escuro" type="checkbox" value="Mam&atilde;e/Gestante" /> Mam&atilde;e/Gestante </label> <label class="inline-flex items-center gap-2"> <input class="accent-marrom-escuro" type="checkbox" value="Madrinha" /> Madrinha </label> <label class="inline-flex items-center gap-2"> <input class="accent-marrom-escuro" type="checkbox" value="Outro" /> Outro </label></div>
+</div>
+<!-- Nome, CEP e Botão WhatsApp -->
+<div class="mt-6">
+<div class="grid sm:grid-cols-2 gap-3 max-w-xl mx-auto mb-4">
+<div><label class="block text-sm font-semibold text-gray-700 mb-1" for="clientName">Nome do cliente *</label> <input id="clientName" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-rosa-pastel focus:border-rosa-pastel" type="text" placeholder="Ex.: Maria Silva" /></div>
+<div><label class="block text-sm font-semibold text-gray-700 mb-1" for="clientCep">CEP *</label> <input id="clientCep" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-rosa-pastel focus:border-rosa-pastel" type="text" placeholder="Ex.: 13000-000" /></div>
+</div>
+<!-- Botão WhatsApp VERDE -->
+<div class="text-center mt-6"><button id="btnWhatsInline" class="btn-whats w-full sm:w-auto text-lg px-8 py-4" title="Enviar or&ccedil;amento pelo WhatsApp"> Finalizar Pedido pelo WhatsApp </button>
+<p id="sendError" class="text-xs text-red-600 mt-2 h-5"></p>
+</div>
+</div>
+</section>
+<!-- AVISO PRAZO -->
+<section class="text-center mb-10">
+<h3 class="text-lg md:text-xl font-bold text-marrom-escuro mb-2">Prazo de fabrica&ccedil;&atilde;o</h3>
+<p class="text-sm text-gray-700 max-w-2xl mx-auto">Produ&ccedil;&atilde;o em at&eacute; 7 dias &uacute;teis ap&oacute;s confirma&ccedil;&atilde;o do pagamento.</p>
+</section>
+</div>
+<p>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ====== CONFIG ======
+  const maxMeasurements = 10;
+  const densityPrices = { '23': 2500, '28': 3000, '33': 3500, '44': 4000 };
+  const specificWeights = { '23': 0.000023, '28': 0.000028, '33': 0.000033, '44': 0.000044 };
+  const minCyl = 8;
+  const minRect = 1;
+  const LS_KEY = 'casaRoque_calc_v2';
+  const WHATSAPP_NUMBER = '5519981258868';
+
+  const container = document.getElementById('measurementsContainer');
+  const btnAdd = document.getElementById('btnAddMeasurement');
+  const btnClear = document.getElementById('btnClearBudget');
+  const limitMsg = document.getElementById('measurementLimitMessage');
+  const clientNameEl = document.getElementById('clientName');
+  const clientCepEl  = document.getElementById('clientCep');
+  const audienceGroup= document.getElementById('audienceGroup');
+  const btnWhatsInline = document.getElementById('btnWhatsInline');
+  const sendError = document.getElementById('sendError');
+
+  function formatBRL(v) { 
+    return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); 
+  }
+
+  // ====== CARD HTML (D23 padrão) ======
+  function cardHTML(index, type='cylindrical') {
+    const isCyl = type === 'cylindrical';
+    return `
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 relative" data-index="${index}" data-type="${type}">
+        <button class="remove-card absolute top-3 right-3 text-red-500 text-lg font-bold hover:text-red-700" title="Remover medida">&times;</button>
+        <h3 class="font-bold text-marrom-escuro mb-4">Medida ${index+1}</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div class="md:col-span-2">
+            <p class="text-sm font-semibold mb-2 text-gray-700">Forma da espuma</p>
+            <div class="flex rounded-md overflow-hidden bg-gray-100">
+              <button type="button" class="btn-form w-1/2 py-2 text-sm font-semibold ${isCyl ? 'bg-marrom-escuro text-white' : 'text-gray-700'}" data-form="cylindrical">Cilíndrica</button>
+              <button type="button" class="btn-form w-1/2 py-2 text-sm font-semibold ${!isCyl ? 'bg-marrom-escuro text-white' : 'text-gray-700'}" data-form="rectangular">Retangular</button>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Densidade</label>
+            <select class="density w-full border border-gray-300 rounded-md px-2 py-2 bg-white focus:ring-2 focus:ring-rosa-pastel">
+              <option value="23" selected>D23 — kit berço</option>
+              <option value="28">D28 — berço/trocador</option>
+              <option value="33">D33 — assentos</option>
+              <option value="44">D44 — extra firme</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Quantidade</label>
+            <input type="number" min="1" value="1" class="qty w-full border border-gray-300 rounded-md px-2 py-2 focus:ring-2 focus:ring-rosa-pastel" />
+          </div>
+        </div>
+
+        <!-- inputs cilíndrica -->
+        <div class="cyl-inputs mt-4 ${isCyl ? '' : 'hidden'}">
+          <p class="text-xs text-gray-500 mb-2">Medidas do rolinho</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Comprimento (cm)</label>
+              <input type="number" min="${minCyl}" placeholder="Ex: 130" class="cyl-length w-full border border-gray-300 rounded-md px-2 py-2 focus:ring-2 focus:ring-rosa-pastel" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Diâmetro (cm)</label>
+              <input type="number" min="${minCyl}" placeholder="Ex: 13" class="cyl-diameter w-full border border-gray-300 rounded-md px-2 py-2 focus:ring-2 focus:ring-rosa-pastel" />
+            </div>
+          </div>
+        </div>
+
+        <!-- inputs retangular -->
+        <div class="rect-inputs mt-4 ${!isCyl ? '' : 'hidden'}">
+          <p class="text-xs text-gray-500 mb-2">Medidas da peça</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Comprimento (cm)</label>
+              <input type="number" min="${minRect}" placeholder="Ex: 130" class="rect-length w-full border border-gray-300 rounded-md px-2 py-2 focus:ring-2 focus:ring-rosa-pastel" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Largura (cm)</label>
+              <input type="number" min="${minRect}" placeholder="Ex: 30" class="rect-width w-full border border-gray-300 rounded-md px-2 py-2 focus:ring-2 focus:ring-rosa-pastel" />
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Altura (cm)</label>
+              <input type="number" min="${minRect}" placeholder="Ex: 5" class="rect-height w-full border border-gray-300 rounded-md px-2 py-2 focus:ring-2 focus:ring-rosa-pastel" />
+            </div>
+          </div>
+        </div>
+
+        <!-- total -->
+        <div class="mt-5 bg-bege-suave rounded-md px-4 py-3 flex flex-col md:flex-row justify-between gap-3 text-sm">
+          <div>
+            <span class="font-semibold text-marrom-escuro">Valor unitário:</span>
+            <span class="unit-price ml-2 text-marrom-escuro font-bold">R$ 0,00</span>
+          </div>
+          <div class="text-right">
+            <span class="font-semibold text-marrom-escuro">Valor total da medida:</span>
+            <span class="total-price ml-2 text-marrom-escuro font-bold">R$ 0,00</span>
+          </div>
+        </div>
+
+        <p class="error text-xs text-red-500 mt-2 h-4"></p>
+      </div>
+    `;
+  }
+
+  function calcCard(card) {
+    const type = card.dataset.type;
+    const density = card.querySelector('.density').value;
+    const qty = parseInt(card.querySelector('.qty').value) || 0;
+    let vol_m3 = 0; 
+    let real_cm3 = 0;
+    const err = card.querySelector('.error');
+    err.textContent = '';
+
+    if (qty <= 0) { 
+      err.textContent = 'Quantidade inválida.'; 
+      return {unit:0,total:0,weight:0}; 
+    }
+
+    if (type === 'cylindrical') {
+      const L = parseFloat(card.querySelector('.cyl-length').value);
+      const D = parseFloat(card.querySelector('.cyl-diameter').value);
+      if (isNaN(L) || L < minCyl || isNaN(D) || D < minCyl) { 
+        err.textContent = `Preencha comprimento e diâmetro (mín. ${minCyl} cm).`; 
+        return {unit:0,total:0,weight:0}; 
+      }
+      vol_m3 = (L/100) * (D/100) * (D/100);
+      const r = D/2; 
+      real_cm3 = Math.PI * r * r * L;
+    } else {
+      const L = parseFloat(card.querySelector('.rect-length').value);
+      const W = parseFloat(card.querySelector('.rect-width').value);
+      const H = parseFloat(card.querySelector('.rect-height').value);
+      if (isNaN(L) || L < minRect || isNaN(W) || W < minRect || isNaN(H) || H < minRect) { 
+        err.textContent = 'Preencha todas as medidas.'; 
+        return {unit:0,total:0,weight:0}; 
+      }
+      vol_m3 = (L/100) * (W/100) * (H/100);
+      real_cm3 = L*W*H;
+    }
+
+    const unitPrice = vol_m3 * densityPrices[density];
+    const totalPrice = unitPrice * qty;
+    const weightPerPiece = real_cm3 * specificWeights[density];
+    const totalWeight = weightPerPiece * qty;
+    
+    card.querySelector('.unit-price').textContent = formatBRL(unitPrice);
+    card.querySelector('.total-price').textContent = formatBRL(totalPrice);
+    
+    return {unit:unitPrice, total:totalPrice, weight:totalWeight};
+  }
+
+  function bindCard(card) {
+    card.querySelectorAll('.btn-form').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const f = btn.dataset.form; 
+        card.dataset.type = f;
+        card.querySelectorAll('.btn-form').forEach(b=>{ 
+          b.classList.remove('bg-marrom-escuro','text-white'); 
+          b.classList.add('text-gray-700'); 
+        });
+        btn.classList.add('bg-marrom-escuro','text-white');
+        card.querySelector('.cyl-inputs').classList.toggle('hidden', f!=='cylindrical');
+        card.querySelector('.rect-inputs').classList.toggle('hidden', f!=='rectangular');
+        calcCard(card); 
+        saveLS();
+      });
+    });
+    
+    card.querySelectorAll('input,select').forEach(inp=>{ 
+      inp.addEventListener('input', ()=>{ 
+        calcCard(card); 
+        saveLS(); 
+      }); 
+    });
+    
+    card.querySelector('.remove-card').addEventListener('click', ()=>{ 
+      card.remove(); 
+      saveLS(); 
+      if (container.children.length < maxMeasurements) { 
+        btnAdd.disabled = false; 
+        limitMsg.textContent = 'Você pode adicionar até 10 medidas diferentes.'; 
+      } 
+    });
+  }
+
+  function addCard(type='cylindrical', data=null) {
+    if (container.children.length >= maxMeasurements) { 
+      limitMsg.textContent = 'Máximo de 10 medidas.'; 
+      btnAdd.disabled = true; 
+      return; 
+    }
+    
+    const temp = document.createElement('div'); 
+    temp.innerHTML = cardHTML(container.children.length, type).trim(); 
+    const card = temp.firstChild; 
+    container.appendChild(card);
+    bindCard(card);
+    
+    if (data) {
+      card.dataset.type = data.type;
+      card.querySelector('.density').value = data.density;
+      card.querySelector('.qty').value = data.qty;
+      if (data.type === 'cylindrical') {
+        card.querySelector('.cyl-length').value = data.dim.length;
+        card.querySelector('.cyl-diameter').value = data.dim.diameter;
+        card.querySelector('.cyl-inputs').classList.remove('hidden'); 
+        card.querySelector('.rect-inputs').classList.add('hidden');
+      } else {
+        card.querySelector('.rect-length').value = data.dim.length;
+        card.querySelector('.rect-width').value = data.dim.width;
+        card.querySelector('.rect-height').value = data.dim.height;
+        card.querySelector('.rect-inputs').classList.remove('hidden'); 
+        card.querySelector('.cyl-inputs').classList.add('hidden');
+        card.querySelectorAll('.btn-form').forEach(b=>{ 
+          b.classList.remove('bg-marrom-escuro','text-white'); 
+          b.classList.add('text-gray-700'); 
+        });
+        card.querySelector('.btn-form[data-form="rectangular"]').classList.add('bg-marrom-escuro','text-white');
+      }
+    }
+    
+    calcCard(card); 
+    saveLS();
+  }
+
+  function saveLS() {
+    const data = [];
+    container.querySelectorAll('[data-index]').forEach(card=>{
+      const t = card.dataset.type;
+      const density = card.querySelector('.density').value;
+      const qty = card.querySelector('.qty').value;
+      let dim = {};
+      if (t==='cylindrical'){
+        dim = { 
+          length: card.querySelector('.cyl-length').value, 
+          diameter: card.querySelector('.cyl-diameter').value 
+        };
+      } else {
+        dim = { 
+          length: card.querySelector('.rect-length').value, 
+          width: card.querySelector('.rect-width').value, 
+          height: card.querySelector('.rect-height').value 
+        };
+      }
+      data.push({type:t, density, qty, dim});
+    });
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  }
+
+  function loadFromLS() {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) { 
+      addCard('cylindrical'); 
+      return; 
+    }
+    try {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr.length) { 
+        arr.forEach(item=>addCard(item.type, item)); 
+      } else { 
+        addCard('cylindrical'); 
+      }
+    } catch(e){ 
+      addCard('cylindrical'); 
+    }
+  }
+
+  function gatherBudgetForWhats() {
+    const cards = container.querySelectorAll('[data-index]');
+    let total = 0, totalWeight = 0, pieces = 0;
+    const groups = {}; 
+    let hasValid = false;
+
+    cards.forEach(card=>{
+      const type = card.dataset.type; 
+      const density = card.querySelector('.density').value; 
+      const qty = parseInt(card.querySelector('.qty').value) || 0;
+      const result = calcCard(card);
+      
+      if (!result.unit || result.unit === 0) return;
+      
+      hasValid = true;
+      let dimsText = '';
+      
+      if (type==='cylindrical') {
+        const L = parseFloat(card.querySelector('.cyl-length').value); 
+        const D = parseFloat(card.querySelector('.cyl-diameter').value);
+        dimsText = `Comp. ${L} cm × Diâm. ${D} cm`;
+      } else {
+        const L = parseFloat(card.querySelector('.rect-length').value); 
+        const W = parseFloat(card.querySelector('.rect-width').value); 
+        const H = parseFloat(card.querySelector('.rect-height').value);
+        dimsText = `${L} cm × ${W} cm × ${H} cm`;
+      }
+      
+      total += result.total;
+      totalWeight += result.weight;
+      pieces += qty;
+      
+      if (!groups[density]) groups[density] = [];
+      groups[density].push({ 
+        qty, 
+        typeName: type==='cylindrical' ? 'Cilíndrica' : 'Retangular',
+        dimsText, 
+        unitPrice: result.unit, 
+        subtotal: result.total, 
+        weightMeasure: result.weight 
+      });
+    });
+
+    return {hasValid, total, totalWeight, groups, pieces};
+  }
+
+  function selectedAudience() {
+    return Array.from(audienceGroup.querySelectorAll('input[type="checkbox"]:checked')).map(c=>c.value);
+  }
+
+  function buildWhatsMessage(name, cep) {
+    const {hasValid, total, totalWeight, groups, pieces} = gatherBudgetForWhats();
+    
+    if (!hasValid) {
+      return {ok:false, msg:'Adicione pelo menos uma medida válida para enviar.'};</script>
+</p>
+<p>} const aud = selectedAudience(); const perfil = aud.length ? aud.join(' / ') : '&mdash;'; let text = `Ol&aacute; CasaRoque! 👋 Segue meu or&ccedil;amento de espumas: Cliente: ${name || 'N&atilde;o informado'} CEP: ${cep || 'N&atilde;o informado'} Perfil: ${perfil} `; const densities = Object.keys(groups).sort((a,b)=&gt;parseInt(a)-parseInt(b)); densities.forEach(d=&gt;{ text += `--- ESPUMAS D${d} --- `; groups[d].forEach((it,idx)=&gt;{ text += `${idx+1}) ${it.qty}x ${it.typeName} &mdash; ${it.dimsText} &bull; Unit.: ${formatBRL(it.unitPrice)} &bull; Subtotal: ${formatBRL(it.subtotal)} &bull; Peso: ${it.weightMeasure.toFixed(3)} kg `; }); text += ` `; }); text += `--- RESUMO --- Total estimado (espumas): ${formatBRL(total)} Peso estimado: ${totalWeight.toFixed(3)} kg Produ&ccedil;&atilde;o at&eacute; 7 dias &uacute;teis ap&oacute;s confirma&ccedil;&atilde;o do pagamento. Por favor, informar o frete para o CEP acima. Obrigada!`; return {ok:true, msg:text, pieces, total}; } function openWhatsWith(text) { const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`; const apiUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&amp;text=${encodeURIComponent(text)}`; const w = window.open(waUrl, '_blank'); if (!w || w.closed || typeof w.closed==='undefined') { window.open(apiUrl, '_blank'); } } function handleSend() { sendError.textContent = ''; const name = (clientNameEl.value || '').trim() || 'N&atilde;o informado'; const cep = (clientCepEl.value || '').trim() || 'N&atilde;o informado'; const built = buildWhatsMessage(name, cep); if (!built.ok) { sendError.textContent = built.msg; return; } try { openWhatsWith(built.msg); } catch (e) { try { navigator.clipboard.writeText(built.msg); sendError.textContent = 'N&atilde;o foi poss&iacute;vel abrir o WhatsApp. O texto foi copiado para a &aacute;rea de transfer&ecirc;ncia.'; } catch { sendError.textContent = 'N&atilde;o foi poss&iacute;vel abrir o WhatsApp. Copie e cole o or&ccedil;amento manualmente.'; } } } // Eventos btnWhatsInline.addEventListener('click', handleSend); btnAdd.addEventListener('click', ()=&gt; { addCard('cylindrical'); }); btnClear.addEventListener('click', ()=&gt;{ localStorage.removeItem(LS_KEY); container.innerHTML = ''; addCard('cylindrical'); btnAdd.disabled = false; limitMsg.textContent = 'Voc&ecirc; pode adicionar at&eacute; 10 medidas diferentes.'; }); // Inicializa&ccedil;&atilde;o loadFromLS(); });</p>
